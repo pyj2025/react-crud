@@ -89,10 +89,8 @@ const MainApp: React.FC = () => {
   }
 
   return (
-    <div className="flex flex-col">
-      <h1 className="text-4xl font-semibold text-blue-800">
-        Joon's React Crud
-      </h1>
+    <div className="flex flex-col w-screen h-screen bg-gray-800 p-3">
+      <h1 className="text-4xl font-semibold text-white">Joon's React Crud</h1>
       <UserList
         users={users}
         removeUser={removeUser}

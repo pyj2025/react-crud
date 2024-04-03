@@ -66,30 +66,62 @@ const UserEditForm: React.FC<UserEditFormProps> = ({
   );
 
   return (
-    <div>
-      <form onSubmit={onSubmit}>
-        <h2>Edit User:</h2>
-        <input
-          type="text"
-          value={firstname}
-          placeholder="First Name"
-          onChange={onFirstnameChange}
-        />
-        <input
-          type="text"
-          value={lastname}
-          placeholder="Last Name"
-          onChange={onLastnameChange}
-        />
-        <input
-          type="email"
-          value={email}
-          placeholder="Email"
-          onChange={onEmailChange}
-        />
-        <button type="submit">Edit</button>
-      </form>
-    </div>
+    <form className="bg-gray-700 m-4 p-2 rounded" onSubmit={onSubmit}>
+      <h2 className="text-xl font-medium text-white mb-2">Edit User:</h2>
+      <div className="grid grid-cols-4 gap-1">
+        <div>
+          <label className="block mb-2 text-sm font-medium text-gray-100">
+            First name
+          </label>
+          <input
+            type="text"
+            id="first_name"
+            value={firstname}
+            placeholder="First Name"
+            onChange={onFirstnameChange}
+            className="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+            required
+          />
+        </div>
+        <div>
+          <label className="block mb-2 text-sm font-medium text-gray-100">
+            Last name
+          </label>
+          <input
+            type="text"
+            id="last_name"
+            value={lastname}
+            placeholder="Last Name"
+            onChange={onLastnameChange}
+            className="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+            required
+          />
+        </div>
+        <div>
+          <label className="block mb-2 text-sm font-medium text-gray-100">
+            Email
+          </label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            placeholder="Email"
+            onChange={onEmailChange}
+            className="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2"
+            required
+          />
+        </div>
+        <div>
+          <label className="block mb-2 text-sm font-medium">&nbsp;</label>
+          <button
+            type="submit"
+            className="bg-gray-700 border border-gray-600 text-white text-sm rounded-lg block w-full p-2"
+          >
+            Edit
+          </button>
+        </div>
+      </div>
+    </form>
   );
 };
 
