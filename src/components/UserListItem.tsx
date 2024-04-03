@@ -1,7 +1,8 @@
 import React from 'react';
+import { User } from '../type';
 
 type UserListItemProps = {
-  user: any;
+  user: User;
 };
 
 const UserListItem: React.FC<UserListItemProps> = ({ user }) => {
