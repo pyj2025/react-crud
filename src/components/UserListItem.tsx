@@ -17,13 +17,21 @@ const UserListItem: React.FC<UserListItemProps> = ({
   const { id, first_name, last_name, email } = user;
   return (
     <div key={id} className="grid grid-cols-6">
-      <div className="text-lg font-normal">{id}</div>
-      <div className="text-lg font-normal">{first_name}</div>
-      <div className="text-lg font-normal">{last_name}</div>
-      <div className="text-lg font-normal">{email}</div>
+      <div className="text-lg text-center text-gray-100 font-normal p-1 border border-gray-600">
+        {id}
+      </div>
+      <div className="text-lg text-gray-100 font-normal p-1 px-2 border border-gray-600">
+        {first_name}
+      </div>
+      <div className="text-lg text-gray-100 font-normal p-1 px-2 border border-gray-600">
+        {last_name}
+      </div>
+      <div className="text-lg text-gray-100 truncate font-normal p-1 px-2 border border-gray-600">
+        {email}
+      </div>
 
       <button
-        className="text-right"
+        className="text-center text-gray-100 p-1 border border-gray-600 "
         onClick={() => {
           selectUser(user);
           toggleEdit();
@@ -31,7 +39,10 @@ const UserListItem: React.FC<UserListItemProps> = ({
       >
         Edit
       </button>
-      <button className="text-right" onClick={() => removeUser(id)}>
+      <button
+        className="text-center text-gray-100 p-1 border border-gray-600"
+        onClick={() => removeUser(id)}
+      >
         Remove
       </button>
     </div>

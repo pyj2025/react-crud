@@ -15,15 +15,35 @@ const UserList: React.FC<UserListProps> = ({
   selectUser,
   toggleEdit,
 }) => {
+  const listSize = React.useMemo(() => {
+    return users.length;
+  }, [users]);
+
   return (
-    <div>
-      <h1 className="text-xl font-medium">User List</h1>
+    <div className="bg-gray-700 m-4 p-2 rounded">
+      <h1 className="text-xl font-medium text-white mb-2">
+        User List ({listSize})
+      </h1>
       <div>
-        <div className="grid grid-cols-6 border">
-          <div className="text-lg font-medium">ID</div>
-          <div className="text-lg font-medium">First Name</div>
-          <div className="text-lg font-medium">Last Name</div>
-          <div className="text-lg font-medium">Email</div>
+        <div className="grid grid-cols-6 ">
+          <div className="text-lg font-medium text-center text-blue-300 bg-gray-800 p-2 border border-gray-600">
+            ID
+          </div>
+          <div className="text-lg font-medium text-center text-blue-300 bg-gray-800 p-2 border border-gray-600">
+            First Name
+          </div>
+          <div className="text-lg font-medium text-center text-blue-300 bg-gray-800 p-2 border border-gray-600">
+            Last Name
+          </div>
+          <div className="text-lg font-medium text-center text-blue-300 bg-gray-800 p-2 border border-gray-600">
+            Email
+          </div>
+          <div className="text-lg font-medium text-center text-blue-300 bg-gray-800 p-2 border border-gray-600">
+            Edit
+          </div>
+          <div className="text-lg font-medium text-center text-blue-300 bg-gray-800 p-2 border border-gray-600">
+            Remove
+          </div>
         </div>
         <div>
           {users.map((user) => (
