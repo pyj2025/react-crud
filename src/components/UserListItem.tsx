@@ -38,4 +38,4 @@ const UserListItem: React.FC<UserListItemProps> = ({
   );
 };
 
-export default UserListItem;
+export default React.memo(UserListItem);

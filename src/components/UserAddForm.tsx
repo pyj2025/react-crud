@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 
 type UserAddFormProps = {
   addUser: (firstname: string, lastname: string, email: string) => void;
@@ -9,31 +9,43 @@ const UserAddForm: React.FC<UserAddFormProps> = ({ addUser }) => {
   const [lastname, setLastname] = useState<string>('');
   const [email, setEmail] = useState<string>('');
 
-  const onFirstnameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFirstname(e.target.value);
-  };
+  const onFirstnameChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFirstname(e.target.value);
+    },
+    []
+  );
 
-  const onLastnameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLastname(e.target.value);
-  };
+  const onLastnameChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setLastname(e.target.value);
+    },
+    []
+  );
 
-  const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
+  const onEmailChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setEmail(e.target.value);
+    },
+    []
+  );
 
-  const onSubmit = (e: React.FormEvent) => {
-    if (firstname !== '' && lastname !== '' && email !== '') {
-      addUser(firstname, lastname, email);
-    } else {
-      alert('Missing Info');
-    }
+  const onSubmit = useCallback(
+    (e: React.FormEvent) => {
+      if (firstname !== '' && lastname !== '' && email !== '') {
+        addUser(firstname, lastname, email);
+      } else {
+        alert('Missing Info');
+      }
 
-    setFirstname('');
-    setLastname('');
-    setEmail('');
+      setFirstname('');
+      setLastname('');
+      setEmail('');
 
-    e.preventDefault();
-  };
+      e.preventDefault();
+    },
+    [addUser, email, firstname, lastname]
+  );
 
   return (
     <form onSubmit={onSubmit}>

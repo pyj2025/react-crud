@@ -33,55 +33,56 @@ const MainApp: React.FC = () => {
     fetchUsers();
   }, []);
 
-  const addUser = (firstname: string, lastname: string, email: string) => {
-    const newUser = {
-      id: nextId.current++,
-      first_name: firstname,
-      last_name: lastname,
-      email,
-    };
+  const addUser = React.useCallback(
+    (firstname: string, lastname: string, email: string) => {
+      const newUser = {
+        id: nextId.current++,
+        first_name: firstname,
+        last_name: lastname,
+        email,
+      };
 
-    const fullName = firstname + ' ' + lastname;
-    createUser(fullName);
+      const fullName = firstname + ' ' + lastname;
+      createUser(fullName);
 
-    setUsers((users) => [...users, newUser]);
-  };
+      setUsers((users) => [...users, newUser]);
+    },
+    []
+  );
 
-  const toggleEdit = () => {
+  const toggleEdit = React.useCallback(() => {
     if (selectedUser) {
       setSelectedUser((user) => null);
     }
     setEditOpen((prev) => !prev);
-  };
+  }, [selectedUser]);
 
-  const selectUser = (user: User) => {
+  const selectUser = React.useCallback((user: User) => {
     setSelectedUser((selected) => user);
-  };
+  }, []);
 
-  const removeUser = (id: number) => {
+  const removeUser = React.useCallback((id: number) => {
     deleteUser(id);
     setUsers((users) => users.filter((user) => user.id !== id));
-  };
+  }, []);
 
-  const editUser = (
-    id: number,
-    firstname: string,
-    lastname: string,
-    email: string
-  ) => {
-    toggleEdit();
+  const editUser = React.useCallback(
+    (id: number, firstname: string, lastname: string, email: string) => {
+      toggleEdit();
 
-    const fullName = firstname + ' ' + lastname;
-    updateUser(fullName);
+      const fullName = firstname + ' ' + lastname;
+      updateUser(fullName);
 
-    setUsers((users) =>
-      users.map((user) =>
-        user.id === id
-          ? { ...user, first_name: firstname, last_name: lastname, email }
-          : user
-      )
-    );
-  };
+      setUsers((users) =>
+        users.map((user) =>
+          user.id === id
+            ? { ...user, first_name: firstname, last_name: lastname, email }
+            : user
+        )
+      );
+    },
+    [toggleEdit]
+  );
 
   if (users.length === 0) {
     return <div>Loading...</div>;
