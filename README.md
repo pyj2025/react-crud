@@ -1,12 +1,54 @@
-# Getting Started with Create React App
+# Joon's React-Crud App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project demonstrates a basic React app that connects to an API with dummy data. The app fetches data from the API ([reqres.in](https://reqres.in/)), displays it in a table, and allows for post, edit, and delete operations.
+
+## Getting Started
+
+1. Clone this repository to your local machine.
+2. Install dependencies using `yarn`.
+3. Run the app locally with `yarn start`.
+
+## Features
+
+### Fetching Data
+
+The app fetches data from the [reqres.in](https://reqres.in/) API and displays it. The data includes user information such as name and email.
+
+### Displaying Data
+
+The fetched data is presented in a table format. 
+
+### CRUD Operations
+
+The app supports the following CRUD operations:
+
+1. **Create**: Add new users to the table.
+2. **Read**: Display existing user data.
+3. **Update**: Edit user information.
+4. **Delete**: Remove users from the table.
+
+## Code Structure
+
+The main components of the app are:
+
+- `MainApp.tsx`: The main component that fetches data and renders the table.
+- `UserList.tsx`: Displays the list of users.
+- `UserAddForm.tsx`: Allows to add a new user.
+- `UserEditForm.tsx`: Allows to update selected user.
+
+## Deployment
+
+The app is deployed on GitHub Pages. You can find the live version here: [GitHub Pages Demo](https://pyj2025.github.io/react-crud/)
+
+## Conclusion
+
+This simple React app demonstrates how to connect to an API, fetch data, and perform CRUD operations. Feel free to explore the code and adapt it for your own projects!
 
 ## Available Scripts
 
 In the project directory, you can run:
 
-### `npm start`
+### `yarn start`
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
@@ -14,57 +56,6 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
 
-### `npm test`
+### `yarn deploy`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Deploys the updates on GitHub page
