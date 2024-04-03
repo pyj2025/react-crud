@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import { User } from '../type';
 
 type UserEditFormProps = {
@@ -27,31 +27,43 @@ const UserEditForm: React.FC<UserEditFormProps> = ({
     }
   }, [selectedUser]);
 
-  const onFirstNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFirstname(e.target.value);
-  };
+  const onFirstnameChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setFirstname(e.target.value);
+    },
+    []
+  );
 
-  const onLastnameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setLastname(e.target.value);
-  };
+  const onLastnameChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setLastname(e.target.value);
+    },
+    []
+  );
 
-  const onEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
+  const onEmailChange = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      setEmail(e.target.value);
+    },
+    []
+  );
 
-  const onSubmit = (e: React.FormEvent) => {
-    if (firstname !== '' && lastname !== '' && email !== '') {
-      editUser(selectedUser?.id!, firstname, lastname, email);
-    } else {
-      alert('Missing Info');
-    }
+  const onSubmit = useCallback(
+    (e: React.FormEvent) => {
+      if (firstname !== '' && lastname !== '' && email !== '') {
+        editUser(selectedUser?.id!, firstname, lastname, email);
+      } else {
+        alert('Missing Info');
+      }
 
-    setFirstname('');
-    setLastname('');
-    setEmail('');
+      setFirstname('');
+      setLastname('');
+      setEmail('');
 
-    e.preventDefault();
-  };
+      e.preventDefault();
+    },
+    [editUser, email, firstname, lastname, selectedUser?.id]
+  );
 
   return (
     <div>
@@ -61,7 +73,7 @@ const UserEditForm: React.FC<UserEditFormProps> = ({
           type="text"
           value={firstname}
           placeholder="First Name"
-          onChange={onFirstNameChange}
+          onChange={onFirstnameChange}
         />
         <input
           type="text"
