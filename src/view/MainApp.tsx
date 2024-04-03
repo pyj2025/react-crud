@@ -1,23 +1,36 @@
 import React from 'react';
 import UserList from '../components/UserList.tsx';
+import { getUsers } from '../hook/api.js';
+import { User } from '../type';
 
 const MainApp: React.FC = () => {
-  const [users, setUsers] = React.useState([
-    {
-      id: 7,
-      email: 'michael.lawson@reqres.in',
-      first_name: 'Michael',
-      last_name: 'Lawson',
-      avatar: 'https://reqres.in/img/faces/7-image.jpg',
-    },
-    {
-      id: 8,
-      email: 'lindsay.ferguson@reqres.in',
-      first_name: 'Lindsay',
-      last_name: 'Ferguson',
-      avatar: 'https://reqres.in/img/faces/8-image.jpg',
-    },
-  ]);
+  const [users, setUsers] = React.useState<Array<User> | null>(null);
+  const nextId = React.useRef<number>(0);
+
+  React.useEffect(() => {
+    const fetchUsers = async () => {
+      try {
+        const result = await getUsers();
+        let formattedUser = result.data.map((e) => {
+          return {
+            id: nextId.current++,
+            first_name: e.first_name,
+            last_name: e.last_name,
+            email: e.email,
+          };
+        });
+        setUsers(formattedUser);
+      } catch (error) {
+        console.error('Error fetching users:', error);
+      }
+    };
+
+    fetchUsers();
+  }, []);
+
+  if (!users) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="flex flex-col">

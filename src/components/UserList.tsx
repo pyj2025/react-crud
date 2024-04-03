@@ -1,8 +1,9 @@
 import React from 'react';
 import UserListItem from './UserListItem.tsx';
+import { User } from '../type';
 
 type UserListProps = {
-  users: any;
+  users: Array<User>;
 };
 
 const UserList: React.FC<UserListProps> = ({ users }) => {
