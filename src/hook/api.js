@@ -2,10 +2,10 @@ import axios from 'axios';
 
 const BASE_URL = 'https://reqres.in/api';
 
-export const getUsers = async () => {
+export const getUsers = async (pageNumber) => {
   try {
     // only page 1 and 2 works
-    const response = await axios.get(`${BASE_URL}/users?page=2`);
+    const response = await axios.get(`${BASE_URL}/users?page=${pageNumber}`);
     return response.data;
   } catch (error) {
     console.error('Error fetching users:', error);
@@ -16,7 +16,7 @@ export const getUsers = async () => {
 // post user
 export const createUser = async (name) => {
   try {
-    const response = await axios
+    await axios
       .post(`${BASE_URL}/users`, {
         name: name,
         // job is missing in Get LIST USERS
@@ -25,17 +25,15 @@ export const createUser = async (name) => {
       .then((response) => {
         console.log('createUser response = ', response);
       });
-    return response.data;
   } catch (error) {
-    console.error('Error fetching users:', error);
-    return [];
+    console.error('Error creating users:', error);
   }
 };
 
 // edit User
 export const updateUser = async (name) => {
   try {
-    const response = await axios
+    await axios
       .put(`${BASE_URL}/users/2`, {
         name: name,
         // job is missing in Get LIST USERS
@@ -44,24 +42,18 @@ export const updateUser = async (name) => {
       .then((response) => {
         console.log('updateUser response = ', response);
       });
-    return response.data;
   } catch (error) {
-    console.error('Error fetching users:', error);
-    return [];
+    console.error('Error updating users:', error);
   }
 };
 
 // delete User
 export const deleteUser = async (id) => {
   try {
-    const response = await axios
-      .delete(`${BASE_URL}/users/${id}`)
-      .then((response) => {
-        console.log('deleteUser response = ', response);
-      });
-    return response.data;
+    await axios.delete(`${BASE_URL}/users/${id}`).then((response) => {
+      console.log('deleteUser response = ', response);
+    });
   } catch (error) {
-    console.error('Error fetching users:', error);
-    return [];
+    console.error('Error deleting users:', error);
   }
 };
