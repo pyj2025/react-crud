@@ -50,24 +50,40 @@ const UserEditForm: React.FC<UserEditFormProps> = ({
 
   const onSubmit = useCallback(
     (e: React.FormEvent) => {
-      if (firstname !== '' && lastname !== '' && email !== '') {
-        editUser(selectedUser?.id!, firstname, lastname, email);
+      if (
+        firstname === selectedUser?.first_name &&
+        lastname === selectedUser?.last_name &&
+        email === selectedUser?.email
+      ) {
+        alert('No Change');
       } else {
-        alert('Missing Info');
-      }
+        editUser(selectedUser?.id!, firstname, lastname, email);
 
-      setFirstname('');
-      setLastname('');
-      setEmail('');
+        setFirstname('');
+        setLastname('');
+        setEmail('');
+      }
 
       e.preventDefault();
     },
-    [editUser, email, firstname, lastname, selectedUser?.id]
+    [
+      editUser,
+      email,
+      firstname,
+      lastname,
+      selectedUser?.email,
+      selectedUser?.first_name,
+      selectedUser?.id,
+      selectedUser?.last_name,
+    ]
   );
 
   return (
-    <form className="bg-gray-700 m-4 p-2 rounded" onSubmit={onSubmit}>
-      <h2 className="text-xl font-medium text-white mb-2">Edit User:</h2>
+    <form
+      className="bg-gray-700 m-4 p-2 rounded shadow-2xl"
+      onSubmit={onSubmit}
+    >
+      <h2 className="text-xl font-medium text-white mb-2">Edit User :</h2>
       <div className="grid grid-cols-4 gap-1">
         <div>
           <label className="block mb-2 text-sm font-medium text-gray-100">

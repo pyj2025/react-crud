@@ -9,21 +9,25 @@ const MainApp: React.FC = () => {
   const [users, setUsers] = React.useState<Array<User>>([]);
   const [selectedUser, setSelectedUser] = React.useState<User | null>(null);
   const [editOpen, setEditOpen] = React.useState<boolean>(false);
+  const [pageNumber, setPageNumber] = React.useState<number>(1);
 
   const nextId = React.useRef<number>(0);
 
   React.useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const result = await getUsers();
+        const result = await getUsers(pageNumber);
+
         let formattedUser = result.data.map((e) => {
           return {
-            id: nextId.current++,
+            id: e.id,
             first_name: e.first_name,
             last_name: e.last_name,
             email: e.email,
           };
         });
+
+        nextId.current = formattedUser.length * 2 + 1;
         setUsers(formattedUser);
       } catch (error) {
         console.error('Error fetching users:', error);
@@ -31,7 +35,7 @@ const MainApp: React.FC = () => {
     };
 
     fetchUsers();
-  }, []);
+  }, [pageNumber]);
 
   const addUser = React.useCallback(
     (firstname: string, lastname: string, email: string) => {
@@ -84,18 +88,24 @@ const MainApp: React.FC = () => {
     [toggleEdit]
   );
 
+  const clickPage = React.useCallback((page: number) => {
+    setPageNumber(page);
+  }, []);
+
   if (users.length === 0) {
     return <div>Loading...</div>;
   }
 
   return (
-    <div className="flex flex-col w-screen h-screen bg-gray-800 p-3">
+    <div className="flex flex-col w-screen h-screen bg-gray-800 p-3 overflow-hidden	">
       <h1 className="text-4xl font-semibold text-white">Joon's React Crud</h1>
       <UserList
         users={users}
+        page={pageNumber}
         removeUser={removeUser}
         selectUser={selectUser}
         toggleEdit={toggleEdit}
+        clickPage={clickPage}
       />
       {editOpen && (
         <UserEditForm selectedUser={selectedUser} editUser={editUser} />

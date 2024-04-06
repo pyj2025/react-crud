@@ -34,13 +34,13 @@ const UserAddForm: React.FC<UserAddFormProps> = ({ addUser }) => {
     (e: React.FormEvent) => {
       if (firstname !== '' && lastname !== '' && email !== '') {
         addUser(firstname, lastname, email);
+
+        setFirstname('');
+        setLastname('');
+        setEmail('');
       } else {
         alert('Missing Info');
       }
-
-      setFirstname('');
-      setLastname('');
-      setEmail('');
 
       e.preventDefault();
     },
@@ -48,8 +48,11 @@ const UserAddForm: React.FC<UserAddFormProps> = ({ addUser }) => {
   );
 
   return (
-    <form className="bg-gray-700 m-4 p-2 rounded" onSubmit={onSubmit}>
-      <h2 className="text-xl font-medium text-white mb-2">Add User:</h2>
+    <form
+      className="bg-gray-700 m-4 p-2 rounded shadow-2xl"
+      onSubmit={onSubmit}
+    >
+      <h2 className="text-xl font-medium text-white mb-2">Add User :</h2>
       <div className="grid grid-cols-4 gap-1">
         <div>
           <label className="block mb-2 text-sm font-medium text-gray-100">
