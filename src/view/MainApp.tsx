@@ -50,7 +50,7 @@ const MainApp: React.FC = () => {
   }, []);
 
   const addUser = React.useCallback(
-    (firstname: string, lastname: string, email: string) => {
+    async (firstname: string, lastname: string, email: string) => {
       const newUser = {
         id: nextId.current++,
         first_name: firstname,
@@ -59,7 +59,7 @@ const MainApp: React.FC = () => {
       };
 
       const fullName = firstname + ' ' + lastname;
-      createUser(fullName);
+      await createUser(fullName);
 
       setUsers((users) => [...users, newUser]);
     },
@@ -77,17 +77,17 @@ const MainApp: React.FC = () => {
     setSelectedUser((selected) => user);
   }, []);
 
-  const removeUser = React.useCallback((id: number) => {
-    deleteUser(id);
+  const removeUser = React.useCallback(async (id: number) => {
+    await deleteUser(id);
     setUsers((users) => users.filter((user) => user.id !== id));
   }, []);
 
   const editUser = React.useCallback(
-    (id: number, firstname: string, lastname: string, email: string) => {
+    async (id: number, firstname: string, lastname: string, email: string) => {
       toggleEdit();
 
       const fullName = firstname + ' ' + lastname;
-      updateUser(fullName);
+      await updateUser(fullName);
 
       setUsers((users) =>
         users.map((user) =>
