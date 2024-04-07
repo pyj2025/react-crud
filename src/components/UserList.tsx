@@ -4,20 +4,16 @@ import { User } from '../type';
 
 type UserListProps = {
   users: Array<User>;
-  page: number;
   removeUser: (id: number) => void;
   selectUser: (user: User) => void;
   toggleEdit: () => void;
-  clickPage: (page: number) => void;
 };
 
 const UserList: React.FC<UserListProps> = ({
   users,
-  page,
   removeUser,
   selectUser,
   toggleEdit,
-  clickPage,
 }) => {
   const listSize = React.useMemo(() => {
     return users.length;
@@ -60,26 +56,6 @@ const UserList: React.FC<UserListProps> = ({
             />
           ))}
         </div>
-      </div>
-      <div className="flex gap-2 mt-3 justify-center content-center">
-        <button
-          onClick={() => clickPage(1)}
-          className={`px-4 py-2
-            ${
-              page === 1 ? 'text-blue-500 border border-blue-500' : 'text-white'
-            }
-            bg-gray-600 text-white rounded-xl`}
-        >
-          Page 1
-        </button>
-        <button
-          onClick={() => clickPage(2)}
-          className={`px-4 py-2
-          ${page === 2 ? 'text-blue-500 border border-blue-500' : 'text-white'}
-          bg-gray-600 text-white rounded-xl`}
-        >
-          Page 2
-        </button>
       </div>
     </div>
   );

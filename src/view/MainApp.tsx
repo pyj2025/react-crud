@@ -9,16 +9,16 @@ const MainApp: React.FC = () => {
   const [users, setUsers] = React.useState<Array<User>>([]);
   const [selectedUser, setSelectedUser] = React.useState<User | null>(null);
   const [editOpen, setEditOpen] = React.useState<boolean>(false);
-  const [pageNumber, setPageNumber] = React.useState<number>(1);
 
   const nextId = React.useRef<number>(0);
 
   React.useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const result = await getUsers(pageNumber);
+        const pageOneResult = await getUsers(1);
+        const pageTwoResult = await getUsers(2);
 
-        let formattedUser = result.data.map((e) => {
+        const pageOneUsers = pageOneResult.data.map((e) => {
           return {
             id: e.id,
             first_name: e.first_name,
@@ -27,15 +27,27 @@ const MainApp: React.FC = () => {
           };
         });
 
-        nextId.current = formattedUser.length * 2 + 1;
-        setUsers(formattedUser);
+        const pageTwoUsers = pageTwoResult.data.map((e) => {
+          return {
+            id: e.id,
+            first_name: e.first_name,
+            last_name: e.last_name,
+            email: e.email,
+          };
+        });
+
+        const formattedUsers = [...pageOneUsers, ...pageTwoUsers];
+
+        nextId.current = formattedUsers.length + 1;
+
+        setUsers(formattedUsers);
       } catch (error) {
         console.error('Error fetching users:', error);
       }
     };
 
     fetchUsers();
-  }, [pageNumber]);
+  }, []);
 
   const addUser = React.useCallback(
     (firstname: string, lastname: string, email: string) => {
@@ -88,10 +100,6 @@ const MainApp: React.FC = () => {
     [toggleEdit]
   );
 
-  const clickPage = React.useCallback((page: number) => {
-    setPageNumber(page);
-  }, []);
-
   if (users.length === 0) {
     return <div>Loading...</div>;
   }
@@ -101,11 +109,9 @@ const MainApp: React.FC = () => {
       <h1 className="text-4xl font-semibold text-white">Joon's React Crud</h1>
       <UserList
         users={users}
-        page={pageNumber}
         removeUser={removeUser}
         selectUser={selectUser}
         toggleEdit={toggleEdit}
-        clickPage={clickPage}
       />
       {editOpen && (
         <UserEditForm selectedUser={selectedUser} editUser={editUser} />
